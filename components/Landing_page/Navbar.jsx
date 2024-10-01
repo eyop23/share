@@ -86,7 +86,7 @@ export default function Navbar() {
 
             <li className="flex flex-row ml-10 text-sm uppercase hover:border-b hover:text-darkGrayishBlue">
               <FaShoppingCart size={20} className="mr-2" />
-              <Link href="/buy">Buy</Link>
+              <Link href="/buy">Buy share</Link>
             </li>
 
             <li className="flex flex-row ml-10 text-sm uppercase hover:border-b hover:text-darkGrayishBlue">
@@ -179,13 +179,22 @@ export default function Navbar() {
                   News
                 </li>
               </Link>
+              <Link href="/buy">
+                <li
+                  onClick={() => setNav(false)}
+                  className="flex flex-row  uppercase hover:border-b hover:text-darkGrayishBlue py-4 text-sm"
+                >
+                  <FaShoppingCart size={20} className="mr-2" />
+                  Buy Share
+                </li>
+              </Link>
 
               <Link href="/#Contact">
                 <li
                   onClick={() => setNav(false)}
                   className="flex flex-row  uppercase hover:border-b hover:text-darkGrayishBlue py-4 text-sm"
                 >
-                  <FaEnvelope size={20} className="mr-2" />
+                  <FaPhone size={20} className="mr-2" />
                   Contact
                 </li>
               </Link>
