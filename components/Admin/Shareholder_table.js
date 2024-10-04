@@ -15,6 +15,7 @@ const ShareholderTable = ({ shareholders }) => {
     console.log(id);
     user = JSON.parse(sessionStorage.getItem("user"));
     console.log(user.token);
+
     if (user) {
       const config = {
         method: "DELETE",
@@ -22,20 +23,52 @@ const ShareholderTable = ({ shareholders }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
+
       const response = await fetch(`${baseUrl}api/share/${id}`, config);
       console.log(response.ok);
-      const data = await response.json();
-      if (response.ok) {
+
+      // If the status is 204 (No Content), don't attempt to parse the response body
+      if (response.status !== 204) {
+        const data = await response.json(); // Only parse JSON if there's content
         console.log(data);
-        alert("suucessfully deleted");
+      }
+
+      if (response.ok) {
+        alert("Successfully deleted");
         router.push("/admin1/dashboard");
       } else {
-        console.log("error");
+        console.log("Error during deletion");
       }
     } else {
       router.push("/login");
     }
   };
+
+  // const handleDelete = async (id) => {
+  //   console.log(id);
+  //   user = JSON.parse(sessionStorage.getItem("user"));
+  //   console.log(user.token);
+  //   if (user) {
+  //     const config = {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //     };
+  //     const response = await fetch(`${baseUrl}api/share/${id}`, config);
+  //     console.log(response.ok);
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       console.log(data);
+  //       alert("suucessfully deleted");
+  //       router.push("/admin1/dashboard");
+  //     } else {
+  //       console.log("error");
+  //     }
+  //   } else {
+  //     router.push("/login");
+  //   }
+  // };
   const [searchTerm, setSearchTerm] = useState("");
   const [displayColumns, setDisplayColumns] = useState(25); // default to display all columns //5
   const [currentPage, setCurrentPage] = useState(1);
