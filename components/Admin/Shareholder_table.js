@@ -27,7 +27,8 @@ const ShareholderTable = ({ shareholders }) => {
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        // alert("suucessfully deleted");
+        alert("suucessfully deleted");
+        router.push("/admin1/dashboard");
       } else {
         console.log("error");
       }
